@@ -15,6 +15,13 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -25,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import tgprojects.xyz.care.DTO.User;
 import tgprojects.xyz.care.R;
 import tgprojects.xyz.care.adapters.ImportantInfoAdapter;
 import tgprojects.xyz.care.databinding.ActivityHomeBinding;
@@ -33,6 +41,12 @@ import tgprojects.xyz.care.models.ImportantInfo;
 public class HomeActivity extends AppCompatActivity {
 
     ActivityHomeBinding binding;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference userReference;
+    private User user;
+
     public static final int CAMERA_REQUEST = 1009;
 
     private StorageReference storageRef;
@@ -41,6 +55,32 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        userReference = firebaseDatabase.getReference("Users");
+
+        // Use Current User Name As Toolbar
+        userReference.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+                    user = dataSnapshot.getValue(User.class);
+
+                    if (user != null && user.getName() != null) {
+                        binding.introText.setText("Hello " + user.getName().split(" ")[0]);
+                    } else {
+                        binding.introText.setText("Hello " + firebaseUser.getDisplayName());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         storageRef = FirebaseStorage.getInstance().getReference();
         binding.importantInfoRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         binding.importantInfoRecyclerview.setAdapter(new ImportantInfoAdapter(this, mockData()));
@@ -63,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.fabHousing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent.putExtra(extraName, ((TextView)view).getText());
+                intent.putExtra(extraName, ((TextView) view).getText());
                 startActivity(intent);
             }
         });
@@ -71,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.fabEducation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent.putExtra(extraName, ((TextView)view).getText());
+                intent.putExtra(extraName, ((TextView) view).getText());
                 startActivity(intent);
             }
         });
@@ -79,7 +119,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.fabEmployment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent.putExtra(extraName, ((TextView)view).getText());
+                intent.putExtra(extraName, ((TextView) view).getText());
                 startActivity(intent);
             }
         });
@@ -94,7 +134,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == CAMERA_REQUEST) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -129,7 +170,8 @@ public class HomeActivity extends AppCompatActivity {
 
         UploadTask uploadTask = storageRef.child("image" + getFileName()).putBytes(data);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-            @Override public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+            @Override
+            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
             }
         });
     }
