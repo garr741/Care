@@ -2,6 +2,8 @@ package tgprojects.xyz.care;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.wealthfront.magellan.Navigator;
+import com.wealthfront.magellan.support.SingleActivity;
 
 public class MainActivity extends AppCompatActivity {
 
