@@ -1,102 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="tgprojects.xyz.care.Activity.HomeActivity">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        tools:context="tgprojects.xyz.care.Activity.HomeActivity"
-        >
-    <TextView
+        android:orientation="vertical">
+
+        <TextView
             android:id="@+id/intro_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="44sp"
-            android:layout_margin="16dp"
             android:layout_gravity="center"
+            android:layout_margin="16dp"
             android:text="Hello, Tylor"
             android:textColor="@color/textColorPrimary"
-            android:textStyle="bold"
-            />
-    <TextView
+            android:textSize="44sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Helpful Categories"
             android:layout_margin="12dp"
-            />
-    <android.support.v7.widget.CardView
+            android:text="Helpful Categories" />
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            app:cardElevation="2dp"
-            >
-        <LinearLayout
+            app:cardElevation="2dp">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:weightSum="4"
-                >
-            <TextView
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:id="@+id/fab_housing"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
                     android:drawableTop="@drawable/house_circle"
                     android:gravity="center"
                     android:text="Housing" />
-            <TextView
+
+                <TextView
+                    android:id="@+id/fab_medical"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/medical_circle"
-                    android:drawablePadding="4dp"
-                    android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/medical_circle"
                     android:gravity="center"
                     android:text="Medical" />
-            <TextView
+
+                <TextView
+                    android:id="@+id/fab_employment"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/employment_circle"
-                    android:drawablePadding="4dp"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/employment_circle"
                     android:gravity="center"
                     android:text="Employment" />
-            <TextView
+
+                <TextView
+                    android:id="@+id/fab_education"
                     android:layout_width="80dp"
                     android:layout_height="match_parent"
-                    android:drawableTop="@drawable/education_circle"
-                    android:drawablePadding="4dp"
                     android:layout_margin="8dp"
                     android:layout_weight="1"
+                    android:drawablePadding="4dp"
+                    android:drawableTop="@drawable/education_circle"
                     android:gravity="center"
                     android:text="Education" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <TextView
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Important Information"
             android:layout_margin="12dp"
-            />
-    <FrameLayout
+            android:text="Important Information" />
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-        <android.support.design.widget.FloatingActionButton
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="bottom|right|end"
                 android:layout_margin="16dp"
-                android:background="@android:drawable/btn_plus"
-                />
-        <android.support.v7.widget.RecyclerView
+                android:background="@android:drawable/btn_plus" />
+
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/important_info_recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
-    </FrameLayout>
-</LinearLayout>
+                android:layout_height="match_parent" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

@@ -1,30 +1,39 @@
 package tgprojects.xyz.care.Activity;
 
+import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import tgprojects.xyz.care.adapters.ImportantInfoAdapter;
+import tgprojects.xyz.care.databinding.ActivityHomeBinding;
 import tgprojects.xyz.care.models.ImportantInfo;
 
 import tgprojects.xyz.care.R;
 
 public class HomeActivity extends AppCompatActivity {
 
-    @BindView(R.id.important_info_recyclerview) RecyclerView importantInfoRecyclerView;
-    @BindView(R.id.fab) FloatingActionButton fab;
+    ActivityHomeBinding binding;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
-        importantInfoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        importantInfoRecyclerView.setAdapter(new ImportantInfoAdapter(this, mockData()));
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        binding.importantInfoRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+        binding.importantInfoRecyclerview.setAdapter(new ImportantInfoAdapter(this, mockData()));
+        setupFAB();
     }
 
 
@@ -35,5 +44,41 @@ public class HomeActivity extends AppCompatActivity {
         arrayList.add(importantInfo1);
         arrayList.add(importantInfo2);
         return arrayList;
+    }
+
+    private void setupFAB() {
+        final Intent intent = new Intent(this, ResourceActivity.class);
+        final String extraName = "resource";
+        binding.fabHousing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(extraName, ((TextView)view).getText());
+                startActivity(intent);
+            }
+        });
+
+        binding.fabEducation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(extraName, ((TextView)view).getText());
+                startActivity(intent);
+            }
+        });
+
+        binding.fabEmployment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(extraName, ((TextView)view).getText());
+                startActivity(intent);
+            }
+        });
+
+        binding.fabMedical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(extraName, ((TextView)view).getText());
+                startActivity(intent);
+            }
+        });
     }
 }

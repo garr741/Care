@@ -11,12 +11,19 @@ import tgprojects.xyz.care.R;
 
 public class ResourceActivity extends AppCompatActivity {
 
+    private String resourceTopic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
+
+        resourceTopic = getIntent().getStringExtra("resource");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(resourceTopic);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
