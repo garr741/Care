@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.CreateActivity" />
         <activity
             android:name=".Activity.ResourceActivity"
@@ -31,6 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="tgprojects.xyz.care.Activity.HomeActivity" />
         </activity>
+        <activity android:name=".Activity.ProfileActivity"></activity>
     </application>
 
 </manifest>
