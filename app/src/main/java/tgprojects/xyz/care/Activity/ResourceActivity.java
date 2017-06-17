@@ -9,8 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListAdapter;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import tgprojects.xyz.care.DTO.Resource;
 import tgprojects.xyz.care.R;
@@ -23,6 +30,11 @@ public class ResourceActivity extends AppCompatActivity {
 
     private ActivityResourceBinding binding;
 
+    private DatabaseReference resourcesReference;
+
+    private List<Resource> resources;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +42,13 @@ public class ResourceActivity extends AppCompatActivity {
 
         resourceTopic = getIntent().getStringExtra("resource");
 
+        resourcesReference =  FirebaseDatabase.getInstance().getReference("Resources");
+
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setTitle(resourceTopic);
 
-        mockResources();
+        getResourcesList();
+//        mockResources();
 
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +60,38 @@ public class ResourceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private void getResourcesList() {
+        resourcesReference.orderByChild("subject").equalTo(resourceTopic).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Resource resource;
+                resources = new ArrayList<Resource>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    resource = snapshot.getValue(Resource.class);
+                    resources.add(resource);
+                }
+                createResourceList();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void mockResources() {
         List<Resource> resourceList = new ArrayList<Resource>();
-        resourceList.add(new Resource("https://www.ssa.gov/", "Social Security Application", "You can apply to get a social security card with this link"));
-        resourceList.add((new Resource("https://vinelink.com/#/home","VineLink","Track information about criminal cases and the custody status of offenders")));
-        resourceList.add((new Resource("http://www.in.gov/dcs/3000.htm","Thinking About College?","http://www.in.gov/dcs/3872.htm")));
+        resourcesReference.push().setValue(new Resource("https://www.ssa.gov/", "Education", "Social Security Application", "You can apply to get a social security card with this link"));
+        resourcesReference.push().setValue(new Resource("https://www.ssa.gov/", "Education", "Social Security Application", "You can apply to get a social security card with this link"));
+        resourcesReference.push().setValue(new Resource("https://vinelink.com/#/home", "Education", "VineLink","Track information about criminal cases and the custody status of offenders"));
+        resourcesReference.push().setValue(new Resource("http://www.in.gov/dcs/3000.htm","Education", "Thinking About College?","http://www.in.gov/dcs/3872.htm"));
         ResourcesAdapter adapter = new ResourcesAdapter(resourceList,this);
+        binding.listResource.setAdapter(adapter);
+    }
+
+    private void createResourceList() {
+        ResourcesAdapter adapter = new ResourcesAdapter(resources,this);
         binding.listResource.setAdapter(adapter);
     }
 
