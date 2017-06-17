@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "tgprojects.xyz.care"
         minSdkVersion 23
@@ -17,6 +20,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -27,9 +31,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25+'
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'
