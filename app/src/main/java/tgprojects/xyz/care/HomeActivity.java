@@ -1,5 +1,6 @@
 package tgprojects.xyz.care;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import tgprojects.xyz.care.models.ImportantInfo;
 public class HomeActivity extends AppCompatActivity {
 
     @BindView(R.id.important_info_recyclerview) RecyclerView importantInfoRecyclerView;
+    @BindView(R.id.fab) FloatingActionButton fab;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
