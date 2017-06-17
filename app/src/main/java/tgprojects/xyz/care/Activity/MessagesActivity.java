@@ -24,7 +24,6 @@ public class MessagesActivity extends AppCompatActivity implements MessageThread
 
     @BindView(R.id.send_message) ImageButton sendMessage;
 
-
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
