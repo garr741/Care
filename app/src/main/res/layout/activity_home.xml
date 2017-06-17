@@ -81,4 +81,22 @@
             android:text="Important Information"
             android:layout_margin="12dp"
             />
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom|right|end"
+                android:layout_margin="16dp"
+                android:background="@android:drawable/btn_plus"
+                />
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/important_info_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+    </FrameLayout>
 </LinearLayout>

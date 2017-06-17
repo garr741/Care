@@ -8,5 +8,6 @@
     <color name="yellow">#fdd835</color>
     <color name="green">#43a047</color>
     <color name="textColorPrimary">#000000</color>
+    <color name="black">#25000000</color>
 </resources>
 
