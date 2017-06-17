@@ -26,12 +26,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import io.paperdb.Paper;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import tgprojects.xyz.care.DTO.User;
@@ -53,7 +51,6 @@ public class HomeActivity extends AppCompatActivity {
 
     private StorageReference storageRef;
     private ImportantInfoAdapter adapter;
-    private List<ImportantInfo> importantInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
         userReference = firebaseDatabase.getReference("Users");
 
         // Use Current User Name As Toolbar
@@ -84,12 +82,9 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        if (importantInfos== null) {
-            importantInfos = new ArrayList<>();
-        }
         storageRef = FirebaseStorage.getInstance().getReference();
         binding.importantInfoRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ImportantInfoAdapter(this, importantInfos);
+        adapter = new ImportantInfoAdapter(this, new ArrayList<ImportantInfo>());
         binding.importantInfoRecyclerview.setAdapter(adapter);
         setupFAB();
     }
@@ -183,8 +178,13 @@ public class HomeActivity extends AppCompatActivity {
 
         UploadTask uploadTask = storageRef.child("image" + getFileName()).putBytes(data);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+<<<<<<< HEAD
+            @Override public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+=======
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+>>>>>>> 0488046502dc041ae7ed8a3bf7db0f4762a62fe2
             }
         });
     }

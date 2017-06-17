@@ -10,6 +10,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
+import io.paperdb.Paper;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import tgprojects.xyz.care.R;
 import tgprojects.xyz.care.models.ImportantInfo;
@@ -22,9 +25,9 @@ public class ImportantInfoAdapter extends RecyclerView.Adapter<RecyclerView.View
     private List<ImportantInfo> importantInfos;
     private Context context;
 
-    public ImportantInfoAdapter(Context context, List<ImportantInfo> importantInfos) {
+    public ImportantInfoAdapter(Context context, List<ImportantInfo> infos) {
         this.context = context;
-        this.importantInfos = importantInfos;
+        this.importantInfos = infos;
     }
 
     public void addInfo(ImportantInfo importantInfo) {
