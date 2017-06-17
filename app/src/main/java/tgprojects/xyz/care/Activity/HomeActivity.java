@@ -165,6 +165,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.profile:
                 startActivity(new Intent(this, ProfileActivity.class));
                 break;
+            case R.id.menu_item_onSignout:
+                firebaseAuth.signOut();
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                break;
             case R.id.messages:
                 startActivity(new Intent(this, MessagesActivity.class));
                 break;
