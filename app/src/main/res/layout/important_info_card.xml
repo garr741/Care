@@ -15,8 +15,8 @@
             >
         <ImageView
                 android:id="@+id/important_info_card_image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
                 tools:src="@drawable/birth_cert"
                 />
         <View

@@ -9,5 +9,8 @@
     <color name="green">#43a047</color>
     <color name="textColorPrimary">#000000</color>
     <color name="black">#25000000</color>
+    <color name="my_message_color">#0093B2</color>
+    <color name="their_message_color">#D8D8D8</color>
+    <color name="message_bar">#E9E9E9</color>
 </resources>
 
