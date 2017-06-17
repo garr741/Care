@@ -11,14 +11,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.HomeActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity">
-
+        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.CreateActivity" />
+        <activity
+            android:name=".Activity.ResourceActivity"
+            android:label="@string/title_activity_resource"
+            android:parentActivityName=".Activity.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="tgprojects.xyz.care.Activity.HomeActivity" />
         </activity>
-        <activity android:name=".Activity.CreateActivity"></activity>
     </application>
 
 </manifest>
