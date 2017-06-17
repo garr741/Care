@@ -82,10 +82,14 @@ public class ResourceActivity extends AppCompatActivity {
 
     private void mockResources() {
         List<Resource> resourceList = new ArrayList<Resource>();
-        resourcesReference.push().setValue(new Resource("https://www.ssa.gov/", "Education", "Social Security Application", "You can apply to get a social security card with this link"));
-        resourcesReference.push().setValue(new Resource("https://www.ssa.gov/", "Education", "Social Security Application", "You can apply to get a social security card with this link"));
-        resourcesReference.push().setValue(new Resource("https://vinelink.com/#/home", "Education", "VineLink","Track information about criminal cases and the custody status of offenders"));
-        resourcesReference.push().setValue(new Resource("http://www.in.gov/dcs/3000.htm","Education", "Thinking About College?","http://www.in.gov/dcs/3872.htm"));
+//        resourcesReference.push().setValue(new Resource("https://www.in211.org/", "Medical", "Indiana 2-1-1", " Call 2-1-1 for information and referrals to human services including food, shelter, employment, counseling, and much more."));
+//        resourcesReference.push().setValue(new Resource("https://www.covenanthouse.org/homeless-shelters", "Medical", "Nineline", "We take a different approach to making a differenceCall 1 (800) 999-9999 for support and crisis intervention if you are caring for a teen faced with life changing issues. This line provides answers to tough questions about family, relationships, health, suicide, abuse, drugs and alcohol, sex and running away."));
+//        resourcesReference.push().setValue(new Resource("http://www.school-directory.net", "Education", "School Directory", "Directory for Vocational, Technical, and Trade Schools"));
+//        resourcesReference.push().setValue(new Resource("http://www.in.gov/dcs/3872.htm", "Education", "Thinking About College?", "DCS Page For College"));
+
+//        resourcesReference.push().setValue(new Resource("https://www.ssa.gov/", "Education", "Social Security Application", "You can apply to get a social security card with this link"));
+//        resourcesReference.push().setValue(new Resource("https://vinelink.com/#/home", "Education", "VineLink","Track information about criminal cases and the custody status of offenders"));
+//        resourcesReference.push().setValue(new Resource("http://www.in.gov/dcs/3000.htm","Education", "Thinking About College?","http://www.in.gov/dcs/3872.htm"));
         ResourcesAdapter adapter = new ResourcesAdapter(resourceList,this);
         binding.listResource.setAdapter(adapter);
     }

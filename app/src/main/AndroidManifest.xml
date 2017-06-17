@@ -16,9 +16,14 @@
             android:theme="@style/AppTheme"
             >
         <activity android:name=".Activity.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity"/>
-        <activity android:name=".Activity.CreateActivity"/>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.CreateActivity" />
         <activity
                 android:name=".Activity.ResourceActivity"
                 android:label="@string/title_activity_resource"
@@ -31,10 +36,7 @@
                     />
         </activity>
         <activity android:name=".Activity.MessagesActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
+        <activity android:name=".Activity.ProfileActivity"></activity>
     </application>
 </manifest>

@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -101,6 +104,22 @@ public class HomeActivity extends AppCompatActivity {
             uploadBitmap(photo);
             adapter.addInfo(new ImportantInfo("Birth Certificate", "", photo));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.profile:
+                startActivity(new Intent(this, ProfileActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private String getFileName() {

@@ -13,7 +13,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import tgprojects.xyz.care.DTO.User;
 import tgprojects.xyz.care.R;
 import tgprojects.xyz.care.databinding.ActivityCreateBinding;
 
@@ -80,6 +83,7 @@ public class CreateActivity extends AppCompatActivity {
                         //checking if success
                         if (task.isSuccessful()) {
                             //display some message here
+                            addUserToFirebase();
                             onSignupSuccess();
 
                             Toast.makeText(CreateActivity.this, "Successfully registered, auto logging in...", Toast.LENGTH_LONG).show();
@@ -137,4 +141,20 @@ public class CreateActivity extends AppCompatActivity {
 
         return valid;
     }
+
+    private void addUserToFirebase() {
+        final DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        final String userId = firebaseAuth.getCurrentUser().getUid();
+
+        String name =  binding.inputName.getText().toString();
+        String email =  binding.inputEmail.getText().toString();
+        String address =  binding.inputAddress.getText().toString();
+        String dob =  binding.inputDob.getText().toString();
+        String phonenum =  binding.inputPhoneNumber.getText().toString();
+
+        final User user = new User(userId, name, email, address, dob, phonenum);
+        user.setUserId(userId);
+        userReference.child(userId).setValue(user);
+    }
+
 }
