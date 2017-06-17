@@ -28,6 +28,8 @@ public class MessagesActivity extends AppCompatActivity implements MessageThread
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         ButterKnife.bind(this);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Messages");
         init();
     }
 

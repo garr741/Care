@@ -118,6 +118,10 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 startActivity(new Intent(this, ProfileActivity.class));
+                break;
+            case R.id.messages:
+                startActivity(new Intent(this, MessagesActivity.class));
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
