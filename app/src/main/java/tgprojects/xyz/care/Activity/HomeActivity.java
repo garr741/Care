@@ -1,7 +1,9 @@
-package tgprojects.xyz.care;
+package tgprojects.xyz.care.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import tgprojects.xyz.care.R;
 
 public class HomeActivity extends AppCompatActivity {
 
