@@ -26,6 +26,7 @@ public class CreateActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private static final String TAG = "CreateActivity";
+    private static final int REQUEST_SIGNUP = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class CreateActivity extends AppCompatActivity {
                             //display some message here
                             onSignupSuccess();
 
-                            Toast.makeText(CreateActivity.this, "Successfully registered, auto login...", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CreateActivity.this, "Successfully registered, auto logging in...", Toast.LENGTH_LONG).show();
                         } else {
                             //display some message here
                             String errorString = task.getException().toString();
@@ -96,7 +97,7 @@ public class CreateActivity extends AppCompatActivity {
 
     public void onSignupSuccess() {
         binding.btnSignup.setEnabled(true);
-        setResult(RESULT_OK, null);
+        setResult(REQUEST_SIGNUP, null);
         finish();
     }
 

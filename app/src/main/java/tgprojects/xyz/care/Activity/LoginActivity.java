@@ -4,11 +4,17 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import tgprojects.xyz.care.R;
 import tgprojects.xyz.care.databinding.ActivityLoginBinding;
@@ -16,6 +22,10 @@ import tgprojects.xyz.care.databinding.ActivityLoginBinding;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
+
+    private FirebaseAuth mAuth;
+
+    private ProgressDialog progressDialog;
 
     private static final String TAG = "LoginActivity";
 
@@ -25,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        progressDialog = new ProgressDialog(LoginActivity.this);
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
+
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     public void login() {
@@ -50,26 +64,34 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         binding.btnLogin.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
-        progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
-
         String email = binding.inputEmail.getText().toString();
         String password = binding.inputPassword.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-
-        new Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new
+                OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
                         progressDialog.dismiss();
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            String errorString = task.getException().toString();
+                            String trunctederrorstring = errorString.substring(errorString.indexOf(":"));
+                            Log.d(TAG, errorString);
+                        } else {
+                            Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                            Log.d("Login", "Starting Quiz Activity");
+                            // Launch the landing activity here
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     }
-                }, 3000);
+                });
     }
 
 
