@@ -33,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
     public static final int CAMERA_REQUEST = 1009;
 
     private StorageReference storageRef;
+    private ImportantInfoAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,18 +41,14 @@ public class HomeActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         storageRef = FirebaseStorage.getInstance().getReference();
         binding.importantInfoRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        binding.importantInfoRecyclerview.setAdapter(new ImportantInfoAdapter(this, mockData()));
+        adapter = new ImportantInfoAdapter(this, new ArrayList<ImportantInfo>());
+        binding.importantInfoRecyclerview.setAdapter(adapter);
         setupFAB();
     }
 
-
-    private List<ImportantInfo> mockData() {
-        ImportantInfo importantInfo1 = new ImportantInfo("One", "http://via.placeholder.com/1500x1000");
-        ImportantInfo importantInfo2 = new ImportantInfo("Two", "http://via.placeholder.com/1500x1000");
-        ArrayList<ImportantInfo> arrayList = new ArrayList<>();
-        arrayList.add(importantInfo1);
-        arrayList.add(importantInfo2);
-        return arrayList;
+    @Override protected void onResume() {
+        super.onResume();
+        binding.introText.requestFocus();
     }
 
     private void setupFAB() {
@@ -89,6 +86,12 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+        binding.addDoc.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                Intent imageIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(imageIntent, CAMERA_REQUEST);
+            }
+        });
     }
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -96,6 +99,7 @@ public class HomeActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == CAMERA_REQUEST) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             uploadBitmap(photo);
+            adapter.addInfo(new ImportantInfo("Birth Certificate", "", photo));
         }
     }
 
@@ -111,6 +115,7 @@ public class HomeActivity extends AppCompatActivity {
         UploadTask uploadTask = storageRef.child("image" + getFileName()).putBytes(data);
         uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
             }
         });
     }

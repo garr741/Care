@@ -27,6 +27,11 @@ public class ImportantInfoAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.importantInfos = importantInfos;
     }
 
+    public void addInfo(ImportantInfo importantInfo) {
+        importantInfos.add(importantInfo);
+        notifyDataSetChanged();
+    }
+
     @Override public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = null;
         if (viewType == EMPTY_VIEW) {
@@ -42,7 +47,11 @@ public class ImportantInfoAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (holder instanceof InfoView) {
             InfoView infoView = (InfoView) holder;
             ImportantInfo info = importantInfos.get(position);
-            Picasso.with(context).load(info.getImage()).into(infoView.imageView);
+            if (info.getBitmap() == null) {
+                Picasso.with(context).load(info.getImage()).into(infoView.imageView);
+            } else {
+                infoView.imageView.setImageBitmap(info.getBitmap());
+            }
             infoView.title.setText(info.getTitle());
         }
     }
