@@ -155,6 +155,11 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.profile:
                 startActivity(new Intent(this, ProfileActivity.class));
+            case R.id.menu_item_onSignout:
+                firebaseAuth.signOut();
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

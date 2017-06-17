@@ -27,9 +27,18 @@ public class LoginActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     private static final String TAG = "LoginActivity";
 
     private static final int REQUEST_SIGNUP = 0;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
 
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,17 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         mAuth = FirebaseAuth.getInstance();
+
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                }
+
+            }
+        };
 
     }
 
