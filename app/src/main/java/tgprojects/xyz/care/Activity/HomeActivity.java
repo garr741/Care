@@ -1,4 +1,4 @@
-package tgprojects.xyz.care;
+package tgprojects.xyz.care.Activity;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import tgprojects.xyz.care.adapters.ImportantInfoAdapter;
 import tgprojects.xyz.care.models.ImportantInfo;
+
+import tgprojects.xyz.care.R;
 
 public class HomeActivity extends AppCompatActivity {
 

@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        tools:context="tgprojects.xyz.care.HomeActivity"
+        tools:context="tgprojects.xyz.care.Activity.HomeActivity"
         >
     <TextView
             android:id="@+id/intro_text"
