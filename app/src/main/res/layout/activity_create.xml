@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="tgprojects.xyz.care.CreateActivity">
+    tools:context="tgprojects.xyz.care.Activity.CreateActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -18,7 +18,7 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="72dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="6dp"
                 android:src="@mipmap/ic_launcher" />
@@ -51,6 +51,21 @@
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Address Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp">
+
+                <EditText
+                    android:id="@+id/input_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:inputType="textPostalAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- D.O.B. Label -->
